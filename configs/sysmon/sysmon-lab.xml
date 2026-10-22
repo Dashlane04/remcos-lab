@@ -1,0 +1,20 @@
+<Sysmon schemaversion="4.82">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <EventFiltering>
+    <ProcessCreate onmatch="exclude" />
+    <ProcessTerminate onmatch="exclude" />
+    <NetworkConnect onmatch="exclude" />
+    <DnsQuery onmatch="exclude" />
+    <RegistryEvent onmatch="exclude" />
+    <CreateRemoteThread onmatch="exclude" />
+    <ProcessTampering onmatch="exclude" />
+    <FileCreate onmatch="include">
+      <TargetFilename condition="contains">\Users\</TargetFilename>
+      <TargetFilename condition="contains">\ProgramData\</TargetFilename>
+      <TargetFilename condition="contains">\Windows\Temp\</TargetFilename>
+    </FileCreate>
+    <!-- Empty include means no events. Expand noisy sources only for a recorded experiment. -->
+    <ImageLoad onmatch="include" />
+    <ProcessAccess onmatch="include" />
+  </EventFiltering>
+</Sysmon>

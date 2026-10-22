@@ -1,0 +1,1 @@
+case_id,platform,rule_id,rule_version,query_window_utc,status,applicable_observed_scenarios,matched_scenarios,benign_alerts,monitored_minutes,event_count,query_runtime_ms,live_alert_delay_ms,missing_telemetry,notes

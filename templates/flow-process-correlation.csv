@@ -1,0 +1,1 @@
+run_id,flow_id,pcap_sha256,frame_or_stream_reference,start_utc,end_utc,protocol,source_ip,source_port,destination_ip,destination_port,original_configured_destination,lab_mapping,connection_stage,bytes_out,bytes_in,host,process_guid,pid,image,parent_guid,sysmon_record_reference,clock_tolerance_ms,attribution_confidence,classification,notes

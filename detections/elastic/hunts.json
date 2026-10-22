@@ -1,0 +1,28 @@
+{
+  "status": "experimental, not live-validated; catalog, not a Kibana import object",
+  "indices": ["remcos-lab-*", "logs-windows.sysmon_operational-*"],
+  "hunts": [
+    {
+      "id": "R1",
+      "name": "Run or RunOnce registry value write",
+      "language": "kuery",
+      "query": "event.dataset : \"windows.sysmon_operational\" and winlog.provider_name : \"Microsoft-Windows-Sysmon\" and event.code : \"13\" and (winlog.event_data.TargetObject : *\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\* or winlog.event_data.TargetObject : *\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\*)",
+      "note": "Broad hunt; enable leading wildcards in the query context if required. Registry path matching is case-sensitive on some mappings. Validate case variants against actual events."
+    },
+    {
+      "id": "R2",
+      "name": "Registry value named EXEpath",
+      "language": "kuery",
+      "query": "event.dataset : \"windows.sysmon_operational\" and winlog.provider_name : \"Microsoft-Windows-Sysmon\" and event.code : \"13\" and winlog.event_data.TargetObject : *\\\\EXEpath",
+      "note": "Supports a watchdog investigation, not family attribution by itself. Check field mapping/case."
+    },
+    {
+      "id": "R3",
+      "name": "Run write followed by a same-process connection",
+      "language": "eql",
+      "event_category_field": "event.dataset",
+      "query": "sequence by host.name, winlog.event_data.ProcessGuid with maxspan=5m\n  [any where event.dataset == \"windows.sysmon_operational\" and winlog.provider_name == \"Microsoft-Windows-Sysmon\" and event.code == \"13\" and winlog.event_data.ProcessGuid != null and winlog.event_data.ProcessGuid != \"\" and winlog.event_data.ProcessGuid != \"{00000000-0000-0000-0000-000000000000}\" and winlog.event_data.TargetObject : (\"*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\*\", \"*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\*\")]\n  [any where event.dataset == \"windows.sysmon_operational\" and winlog.provider_name == \"Microsoft-Windows-Sysmon\" and event.code == \"3\"]",
+      "note": "Use EQL, not the Discover KQL bar. Confirm keyword mappings and GUID fields. Different process handoffs and unavailable network events are known gaps."
+    }
+  ]
+}

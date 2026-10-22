@@ -1,0 +1,8 @@
+`remcos_sysmon`
+| where isnotnull(process_guid) AND process_guid!="" AND process_guid!="{00000000-0000-0000-0000-000000000000}" AND (event_code="13" OR event_code="3")
+| eval run_write=if(event_code="13" AND match(registry_target,"(?i)\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run(?:Once)?\\\\"),1,0)
+| sort 0 _time
+| streamstats time_window=5m current=f last(eval(if(run_write=1,_time,null()))) AS persistence_time BY host_id process_guid
+| where event_code="3" AND isnotnull(persistence_time) AND _time>=persistence_time AND _time-persistence_time<=300
+| eval seconds_after_persistence=_time-persistence_time
+| table _time host_id process_guid image destination_ip destination_port persistence_time seconds_after_persistence

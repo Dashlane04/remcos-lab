@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC parser/query fixture. No process represented here was executed. -->
+<Events>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Sysmon"/><EventID>1</EventID><TimeCreated SystemTime="2026-10-22T03:00:00.1234567Z"/><EventRecordID>1001</EventRecordID><Execution ProcessID="4"/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SYNTHETIC-WIN</Computer></System>
+    <EventData><Data Name="ProcessGuid">{11111111-1111-1111-1111-111111111111}</Data><Data Name="ProcessId">4242</Data><Data Name="Image">C:\Users\lab\AppData\Local\FictionalAgent.exe</Data><Data Name="CommandLine">FictionalAgent.exe --fixture-only &quot;not executed&quot;</Data><Data Name="ParentImage">C:\Windows\explorer.exe</Data></EventData>
+  </Event>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Sysmon"/><EventID>13</EventID><TimeCreated SystemTime="2026-10-22T03:00:01.000Z"/><EventRecordID>1002</EventRecordID><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SYNTHETIC-WIN</Computer></System>
+    <EventData><Data Name="ProcessGuid">{11111111-1111-1111-1111-111111111111}</Data><Data Name="ProcessId">4242</Data><Data Name="Image">C:\Users\lab\AppData\Local\FictionalAgent.exe</Data><Data Name="TargetObject">HKU\SYNTHETIC\Software\Microsoft\Windows\CurrentVersion\Run\FictionalLabValue</Data><Data Name="Details">Documentation-only fixture value; never written to a registry</Data></EventData>
+  </Event>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Sysmon"/><EventID>3</EventID><TimeCreated SystemTime="2026-10-22T03:00:04.000Z"/><EventRecordID>1003</EventRecordID><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SYNTHETIC-WIN</Computer></System>
+    <EventData><Data Name="ProcessGuid">{11111111-1111-1111-1111-111111111111}</Data><Data Name="ProcessId">4242</Data><Data Name="Image">C:\Users\lab\AppData\Local\FictionalAgent.exe</Data><Data Name="DestinationIp">192.0.2.10</Data><Data Name="DestinationPort">443</Data><Data Name="Protocol">tcp</Data></EventData>
+  </Event>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Sysmon"/><EventID>13</EventID><TimeCreated SystemTime="2026-10-22T03:00:05.000Z"/><EventRecordID>1004</EventRecordID><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SYNTHETIC-WIN</Computer></System>
+    <EventData><Data Name="ProcessGuid">{11111111-1111-1111-1111-111111111111}</Data><Data Name="ProcessId">4242</Data><Data Name="Image">C:\Users\lab\AppData\Local\FictionalAgent.exe</Data><Data Name="TargetObject">HKU\SYNTHETIC\Software\FictionalLab\EXEpath</Data><Data Name="Details">FictionalAgent.exe</Data></EventData>
+  </Event>
+</Events>

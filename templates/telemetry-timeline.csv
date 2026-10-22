@@ -1,0 +1,1 @@
+run_id,event_time_utc,ingest_time_utc,alert_time_utc,host,provider,channel,event_id,record_reference,process_guid,pid,parent_identity,artifact_or_flow,observation,evidence_reference,confidence,notes

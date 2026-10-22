@@ -1,0 +1,3 @@
+`remcos_sysmon`
+| where event_code="13" AND match(registry_target,"(?i)\\\\EXEpath$")
+| table _time host_id process_guid image registry_target registry_details

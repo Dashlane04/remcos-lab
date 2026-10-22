@@ -1,0 +1,9 @@
+run_id,specimen_id,claimed_version,track,evidence_type,split,repeat_number,snapshot_id,windows_build,office_build,endpoint_policy_hash,sysmon_config_hash,network_mode,collection_profile,start_utc,trigger_utc,end_utc,sensor_clock_offset_ms,status,notes
+BASE-01,,none,background,benign-background,development,1,,,,,,N0,baseline,,,,,NOT_RUN,idle and normal activity
+BASE-02,,none,background,benign-background,development,2,,,,,,N1,baseline,,,,,NOT_RUN,controlled benign network activity
+P49-01,,4.9.3 Pro,payload,actual-malware,development,1,,,,,,N0,baseline,,,,,NOT_RUN,version and acquisition not yet verified
+P49-02,,4.9.3 Pro,payload,actual-malware,development,2,,,,,,N0,baseline,,,,,NOT_RUN,independent restore
+P70-01,,7.0.4 Pro,payload,actual-malware,development,1,,,,,,N0,baseline,,,,,NOT_RUN,version and acquisition not yet verified
+P70-02,,7.0.4 Pro,payload,actual-malware,development,2,,,,,,N0,baseline,,,,,NOT_RUN,independent restore
+C70-01,,7.0.4 Pro,campaign,actual-malware,development,1,,,,,,N2,recorded,,,,,NOT_RUN,requires original evidence and provenance
+HOLDOUT-01,,none,background,benign-background,holdout,1,,,,,,N0,baseline,,,,,NOT_RUN,open only after rules are frozen

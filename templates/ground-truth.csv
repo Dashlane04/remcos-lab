@@ -1,0 +1,1 @@
+case_id,host,start_utc,end_utc,evidence_type,split,scenario_id,observed_behavior,expected_rule_ids,raw_evidence_sha256,notes

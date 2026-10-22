@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "dynamic_templates": [
+      {"lab_strings": {"match_mapping_type": "string", "mapping": {"type": "keyword", "ignore_above": 16384}}}
+    ],
+    "properties": {
+      "@timestamp": {"type": "date"},
+      "event": {"properties": {"id": {"type": "keyword"}, "code": {"type": "keyword"}, "dataset": {"type": "keyword"}}},
+      "host": {"properties": {"name": {"type": "keyword"}}},
+      "destination": {"properties": {"ip": {"type": "ip"}, "port": {"type": "long"}}},
+      "process": {"properties": {"pid": {"type": "long"}}},
+      "winlog": {"properties": {"event_data": {"properties": {"ProcessGuid": {"type": "keyword"}, "TargetObject": {"type": "keyword"}}}}}
+    }
+  }
+}
