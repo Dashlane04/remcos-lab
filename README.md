@@ -1,8 +1,8 @@
 # Inside Remcos: Windows Telemetry & Detection Lab
 
-A Windows malware-analysis lab for studying Remcos 4.9.3 Pro and 7.0.4 Pro, correlating host/network evidence, and developing explainable Splunk detections.
+A Windows malware-analysis lab for studying Remcos 4.9.3 Pro, correlating host/network evidence, and developing explainable YARA and Splunk detections. A comparison with Remcos 7.0.4 Pro is planned.
 
-**Validated:** Splunk ingestion, Sysmon/PowerShell forwarding, benign ETW/PCAP collection, and guest reboot recovery. **Pending:** specimen comparison, detection evaluation, and Elastic/Fleet/Defend deployment.
+**Validated:** Splunk ingestion, Sysmon/PowerShell forwarding, benign ETW/PCAP collection, guest reboot recovery, and a Remcos 4.9.3 Pro file/buffer YARA experiment with results reviewed in Splunk. **Pending:** specimen comparison, broader detection evaluation, and Elastic/Fleet/Defend deployment.
 
 ## Architecture
 
@@ -231,6 +231,25 @@ bash scripts/start-siem.sh --stack splunk --stop
 
 Restore a validated clean guest snapshot between experiments. Guest snapshots do not back up Ubuntu's SIEM data. After WSL restarts, refresh networking and rerun the launcher. On a constrained host, stop Splunk before the optional [Elastic/Fleet phase](docs/setup/03-siem-services.md).
 
+## YARA: Remcos 4.9.3 Pro
+
+The [YARA rules and validation guide](detections/yara/README.md) target the **specific older Remcos 4.9.3 Pro specimen** analyzed in this lab:
+
+```text
+SHA-256: 0af76f2897158bf752b5ee258053215a6de198e8910458c02282c2d4d284add5
+```
+
+| Rule | Input and scope |
+| --- | --- |
+| `Remcos_493Pro_Settings_RC4_x86` | Experimental native x86 file rule combining the 4.9.3 Pro version, parsed SETTINGS resource, and reviewed RC4 KSA bytes |
+| `Remcos_493_Case_DecodedConfig_IOCs` | Case-specific decoded-content indicator; also matches analyst notes containing all four IOCs |
+
+**Coverage of Remcos 7.0.4 Pro, other builds, packed delivery files, and process memory has not been established.** Only one independent malware specimen was tested; a renamed copy is the same specimen.
+
+The recorded read-only validation used yara-python 4.5.4: **134 inputs, 268 rule evaluations, zero scan errors, and zero expectation failures**. The reference set was local OS files from a previously exposed VM, so these results do not establish a population false-positive rate. [Validation summary](detections/yara/validation-summary.json).
+
+YARA runs in the disposable Windows VM. Splunk ingests its JSON scan metadata through the existing `.ndjson` monitor; it does not scan the sample itself. [R4](detections/splunk/R4-yara-native-match.spl) displays the native-file match, [R5](detections/splunk/R5-yara-validation-coverage.spl) checks evaluation coverage, and [R6](detections/splunk/R6-yara-sysmon-hash-correlation.spl) correlates the later file scan with an earlier Sysmon process-start hash. These queries contain the recorded run's IDs and time bounds; update them for a new run.
+
 ## Repository
 
 | Path | Contents |
@@ -238,7 +257,7 @@ Restore a validated clean guest snapshot between experiments. Guest snapshots do
 | `infra/` | Compose profiles and local settings bootstrap |
 | `configs/` | Sysmon policy and Splunk server/forwarder configuration |
 | `scripts/` | Network refresh, startup, capture, export, normalization and import |
-| `detections/` | Experimental SPL and Elastic hunts |
+| `detections/` | Remcos 4.9.3 Pro YARA prototypes, validation guide, SPL queries and Elastic hunts |
 | `fixtures/`, `tests/` | Synthetic checks and local tests |
 | `templates/` | Sample/run manifests, timelines and investigation reports |
 | `data/`, `evidence/` | Private raw/derived evidence; excluded from Git |

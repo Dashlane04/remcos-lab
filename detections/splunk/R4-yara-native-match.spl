@@ -1,0 +1,5 @@
+index=remcos_lab sourcetype="remcos:json" event.dataset="lab.yara"
+labels.case_id="YARA49-20261023-01" earliest=1792749240 latest=1792749360
+event.outcome="success" scan.kind="file" input.id="original-native"
+rule.name="Remcos_493Pro_Settings_RC4_x86" rule.matched=true
+| table _time host.name file.path file.sha256 rule.name rule.ruleset_sha256 scan.engine_version

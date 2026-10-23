@@ -1,0 +1,6 @@
+index=remcos_lab sourcetype="remcos:json" event.dataset="lab.yara"
+labels.case_id="YARA49-20261023-01" earliest=1792749240 latest=1792749360
+| stats count dc(event.id) as distinct_events dc(input.id) as inputs
+    count(eval('rule.matched'="true")) as matches
+    count(eval('event.outcome'="failure")) as errors
+    count(eval('test.passed'="false")) as failed_tests by labels.input_group

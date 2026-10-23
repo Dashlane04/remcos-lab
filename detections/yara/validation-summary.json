@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "target_version": "Remcos 4.9.3 Pro",
+  "run_id": "YARA49-20261023-01",
+  "started_utc": "2026-10-23T09:54:49.302Z",
+  "ended_utc": "2026-10-23T09:54:50.367Z",
+  "engine": "yara-python",
+  "engine_version": "4.5.4",
+  "python_version": "3.13.16",
+  "sample_sha256": "0af76f2897158bf752b5ee258053215a6de198e8910458c02282c2d4d284add5",
+  "sample_bytes": 494592,
+  "sample_hash_unchanged": true,
+  "sample_executed_during_validation": false,
+  "rules_sha256": "9a9ba2e2012bdec652756bd559615f667bd1a893fa055d0a956c36a2a798d47e",
+  "rules_compiled_without_warnings": true,
+  "independent_malware_specimens": 1,
+  "inputs": 134,
+  "rule_evaluations": 268,
+  "failed_scans": 0,
+  "expectation_failures": 0,
+  "os_reference_files": 128,
+  "os_reference_unique_sha256": 128,
+  "native_rule_reference_eligible": 64,
+  "actual_matches_by_rule": {
+    "Remcos_493Pro_Settings_RC4_x86": 2,
+    "Remcos_493_Case_DecodedConfig_IOCs": 2
+  },
+  "input_matrix": [
+    {"group": "specimen", "inputs": 1, "native_rule_matches": 1, "decoded_rule_matches": 0},
+    {"group": "same-specimen-copy", "inputs": 1, "native_rule_matches": 1, "decoded_rule_matches": 0},
+    {"group": "specimen-derived-buffer", "inputs": 1, "native_rule_matches": 0, "decoded_rule_matches": 1},
+    {"group": "os-reference-x86", "inputs": 64, "native_rule_matches": 0, "decoded_rule_matches": 0},
+    {"group": "os-reference-x64", "inputs": 64, "native_rule_matches": 0, "decoded_rule_matches": 0},
+    {"group": "synthetic-control", "inputs": 3, "native_rule_matches": 0, "decoded_rule_matches": 1}
+  ],
+  "domain_literal_trial": {
+    "native_payload_matched": false,
+    "decoded_buffer_matched": true,
+    "benign_ioc_notes_matched": true
+  },
+  "limitations": [
+    "One independent malware specimen; the renamed copy has identical bytes.",
+    "Local OS reference files came from a previously exposed VM, not a vetted clean-room corpus.",
+    "The decoded-content rule also matches benign analyst notes containing all four IOCs.",
+    "No validated coverage of Remcos 7.0.4 Pro, other builds, packed delivery files or process memory.",
+    "No population false-positive-rate estimate is established by this experiment.",
+    "Splunk searches imported scan metadata; YARA ran in the VM. Sysmon hash correlation is retrospective."
+  ]
+}

@@ -1,0 +1,13 @@
+index=remcos_lab earliest=1792746580 latest=now
+(
+    (sourcetype="remcos:json" event.dataset="lab.yara" labels.case_id="YARA49-20261023-01"
+     input.id="original-native" rule.name="Remcos_493Pro_Settings_RC4_x86" rule.matched=true)
+    OR
+    (sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+     ProcessGuid="{ceb1ad92-2516-6adb-910c-000000001200}")
+)
+| rex "<Data Name='Hashes'>SHA256=(?<sysmon_sha256>[A-Fa-f0-9]{64})"
+| eval sha256=lower(coalesce('file.sha256',sysmon_sha256))
+| eval evidence=if('event.dataset'="lab.yara","YARA file scan","Sysmon process start")
+| stats values(evidence) as evidence values(rule.name) as matched_rule values(ProcessGuid) as ProcessGuid by sha256
+| where mvcount(evidence)=2
